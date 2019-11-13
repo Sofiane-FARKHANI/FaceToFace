@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Font;
@@ -13,6 +15,8 @@ public class MainTest extends BasicGame{
 	// Site d origine de l image
 	// http://wallpaperswide.com/low_poly_wild_west-wallpapers.html
 	private Image background;
+	
+	private ArrayList<Ennemi> ennemis;
 	private EnnemiAPied e;
 	private Joueur player;
 	private TextField saisiUser;
@@ -42,6 +46,7 @@ public class MainTest extends BasicGame{
 	public void update(GameContainer gc, int delta) throws SlickException {
 		if(gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
 			if(saisiUser.getText().compareTo(e.getLettres())==0) {
+				player.setScore(player.getScore()+1);
 				e.setEstMort(true);
 			}
 		}
