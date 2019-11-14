@@ -15,10 +15,10 @@ public class MainTest extends BasicGame{
 	private Image background;
 	
 	private ArrayList<Ennemi> ennemis;
-	private EnnemiAPied e;
-	private EnnemiCheval ec;
+	private Ennemi e;
 	private Joueur player;
 	private TextField saisiUser;
+	private int nbEnnemiVague;
 	
 	public MainTest(String name) {
 		super(name);
@@ -27,8 +27,9 @@ public class MainTest extends BasicGame{
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		g.drawImage(this.background, 0, 0);
-		e.render(g);
-		ec.render(g);
+		for (int i=0;i<ennemis.size();i++) {
+			ennemis.get(i).render(g);
+		}
 		player.render(g);
 		saisiUser.render(gc, g);
 	}
@@ -36,25 +37,54 @@ public class MainTest extends BasicGame{
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		this.background = new Image("res/wild_west.png");
-		e = new EnnemiAPied();
-		ec = new EnnemiCheval();
 		player = new Joueur();
 		saisiUser = new TextField(gc, gc.getDefaultFont(), 50, 620, 200, 30);
+		ennemis = new ArrayList<Ennemi>();
+		
+		this.genererEnnemi();
 	}
 
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		if(player.isEstVivant()) {
-			if(gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
-				if(saisiUser.getText().compareTo(e.getLettres())==0) {
-					player.setScore(player.getScore()+1);
-					e.setEstMort(true);
-					saisiUser.setText("");
+			for (int i=0;i<ennemis.size();i++) {
+				if(gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
+					if(ennemis.get(i) instanceof EnnemiAPied) {
+						if(saisiUser.getText().compareTo(((EnnemiAPied) ennemis.get(i)).getLettres())==0) {
+							player.setScore(player.getScore()+1);
+							ennemis.remove(i);
+							saisiUser.setText("");
+							this.genererEnnemi();
+						}
+					} else if(ennemis.get(i) instanceof EnnemiCheval) {
+						if(saisiUser.getText().compareTo(((EnnemiCheval) ennemis.get(i)).getLettres())==0) {
+							player.setScore(player.getScore()+1);
+							ennemis.remove(i);
+							saisiUser.setText("");
+							this.genererEnnemi();
+						}
+					}
 				}
+				break;
 			}
-			ec.update(delta);
-			e.update(delta);
-			player.tuerJoueur(e);
+
+			for (int i=0;i<ennemis.size();i++) {
+				ennemis.get(i).update(delta);
+				player.tuerJoueur(ennemis.get(i));
+			}
+		}
+	}
+	
+	public void genererEnnemi() {
+		nbEnnemiVague = (int)(Math.random()*player.getScore()+1);
+		for(int i=0;i<nbEnnemiVague;i++) {
+			int typeEnnemi = (int)(Math.random()*2);
+			if(typeEnnemi==0) {
+				e = new EnnemiAPied();
+			} else {
+				e = new EnnemiCheval();
+			}
+			ennemis.add(e);
 		}
 	}
 	
