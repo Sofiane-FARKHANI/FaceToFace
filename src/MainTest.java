@@ -44,16 +44,16 @@ public class MainTest extends BasicGame{
 
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
-		if(gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
-			if(saisiUser.getText().compareTo(e.getLettres())==0) {
-				player.setScore(player.getScore()+1);
-				e.setEstMort(true);
+		if(player.isEstVivant()) {
+			if(gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
+				if(saisiUser.getText().compareTo(e.getLettres())==0) {
+					player.setScore(player.getScore()+1);
+					e.setEstMort(true);
+					saisiUser.setText("");
+				}
 			}
-		}
-		e.update(delta);
-		player.tuerJoueur(e);
-		if(!player.isEstVivant()) {
-			gc.setPaused(true);
+			e.update(delta);
+			player.tuerJoueur(e);
 		}
 	}
 	
