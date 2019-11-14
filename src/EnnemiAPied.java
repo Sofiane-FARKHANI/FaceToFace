@@ -39,4 +39,8 @@ public class EnnemiAPied extends Ennemi {
 	public void setEstMort(boolean estMort) {
 		this.estMort = estMort;
 	}
+
+	public float getX() {
+		return x;
+	}
 }

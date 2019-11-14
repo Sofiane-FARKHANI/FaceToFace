@@ -39,7 +39,7 @@ public class MainTest extends BasicGame{
 		this.background = new Image("res/wild_west.png");
 		e = new EnnemiAPied();
 		player = new Joueur();
-		saisiUser = new TextField(gc, gc.getDefaultFont(), 50, 620, 500, 30);
+		saisiUser = new TextField(gc, gc.getDefaultFont(), 50, 620, 200, 30);
 	}
 
 	@Override
@@ -51,6 +51,10 @@ public class MainTest extends BasicGame{
 			}
 		}
 		e.update(delta);
+		player.tuerJoueur(e);
+		if(!player.isEstVivant()) {
+			gc.setPaused(true);
+		}
 	}
 	
 	public static void main(String[] args) {
