@@ -8,9 +8,10 @@ public class EnnemiAPied extends Ennemi {
 
 	/**
 	 * Constructeur par defaut de la classe EnnemiAPied
+	 * @param mot 
 	 */
-	public EnnemiAPied() {
-		this.lettres = "pied";
+	public EnnemiAPied(String mot) {
+		this.lettres = mot;
 		this.x = 600;
 		this.y = (int) (Math.random() * 100 + 400);
 		this.vx = 50;

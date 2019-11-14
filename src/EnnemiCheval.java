@@ -8,9 +8,10 @@ public class EnnemiCheval extends Ennemi {
 
 	/**
 	 * Constructeur par defaut de la classe EnnemiCheval
+	 * @param mot 
 	 */
-	public EnnemiCheval() {
-		this.lettres = "cheval";
+	public EnnemiCheval(String mot) {
+		this.lettres = mot;
 		this.x = 600;
 		this.y = (int) (Math.random() * 100 + 400);
 		this.vx = 100;
