@@ -1,9 +1,6 @@
-import java.io.IOException;
 import java.util.ArrayList;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -25,7 +22,6 @@ public class MainTest extends BasicGame{
 	
 	public MainTest(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -62,6 +58,9 @@ public class MainTest extends BasicGame{
 		}
 	}
 	
+	/**
+	 * Point d entree du programme
+	 */
 	public static void main(String[] args){
 		AppGameContainer app;
 		try {
