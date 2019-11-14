@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.newdawn.slick.AppGameContainer;
@@ -18,6 +19,7 @@ public class MainTest extends BasicGame{
 	
 	private ArrayList<Ennemi> ennemis;
 	private EnnemiAPied e;
+	private EnnemiCheval ec;
 	private Joueur player;
 	private TextField saisiUser;
 	
@@ -30,6 +32,7 @@ public class MainTest extends BasicGame{
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		g.drawImage(this.background, 0, 0);
 		e.render(g);
+		ec.render(g);
 		player.render(g);
 		saisiUser.render(gc, g);
 	}
@@ -38,6 +41,7 @@ public class MainTest extends BasicGame{
 	public void init(GameContainer gc) throws SlickException {
 		this.background = new Image("res/wild_west.png");
 		e = new EnnemiAPied();
+		ec = new EnnemiCheval();
 		player = new Joueur();
 		saisiUser = new TextField(gc, gc.getDefaultFont(), 50, 620, 200, 30);
 	}
@@ -52,13 +56,13 @@ public class MainTest extends BasicGame{
 					saisiUser.setText("");
 				}
 			}
+			ec.update(delta);
 			e.update(delta);
 			player.tuerJoueur(e);
 		}
 	}
 	
-	public static void main(String[] args) {
-	
+	public static void main(String[] args){
 		AppGameContainer app;
 		try {
 			app = new AppGameContainer(new MainTest("FaceToFace"));
@@ -69,7 +73,6 @@ public class MainTest extends BasicGame{
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }
