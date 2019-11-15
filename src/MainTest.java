@@ -66,6 +66,7 @@ public class MainTest extends BasicGame {
 							ennemis.remove(i);
 							saisiUser.setText("");
 							this.genererEnnemi(this.dico);
+							break;
 						}
 					} else if (ennemis.get(i) instanceof EnnemiCheval) {
 						if (saisiUser.getText().compareTo(((EnnemiCheval) ennemis.get(i)).getLettres()) == 0) {
@@ -73,10 +74,10 @@ public class MainTest extends BasicGame {
 							ennemis.remove(i);
 							saisiUser.setText("");
 							this.genererEnnemi(this.dico);
+							break;
 						}
 					}
 				}
-				break;
 			}
 
 			for (int i = 0; i < ennemis.size(); i++) {

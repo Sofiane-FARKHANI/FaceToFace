@@ -14,7 +14,7 @@ public class EnnemiAPied extends Ennemi {
 		this.lettres = mot;
 		this.x = 600;
 		this.y = (int) (Math.random() * 100 + 400);
-		this.vx = 50;
+		this.vx = 20;
 	}
 
 	/**
