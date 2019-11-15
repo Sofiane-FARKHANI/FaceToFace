@@ -14,7 +14,7 @@ public class EnnemiCheval extends Ennemi {
 		this.lettres = mot;
 		this.x = 600;
 		this.y = (int) (Math.random() * 100 + 400);
-		this.vx = 100;
+		this.vx = 75;
 	}
 
 	/**
@@ -23,7 +23,7 @@ public class EnnemiCheval extends Ennemi {
 	 */
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.red);
+		g.setColor(Color.white);
 		g.drawString(lettres, x, y - 25);
 		g.fillRect(x, y, 20, 20);
 	}

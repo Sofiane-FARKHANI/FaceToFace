@@ -9,7 +9,13 @@ public class LireFichier {
 	private String ligne;
 	private ArrayList<String> dico;
 	
-	
+	/**
+	 * Constructeur surchargee
+	 * 
+	 * Le constructeur permet d acceder au contenu du fichier
+	 * 
+	 * @param cheminFichier : chemin du fichier
+	 */
 	public LireFichier(String cheminFichier) {
 		try {
 			this.lecteur = new BufferedReader(new FileReader(new File(cheminFichier)));
@@ -20,6 +26,11 @@ public class LireFichier {
 		this.dico = new ArrayList<String>();
 	}
 	
+	/**
+	 * Methode permettant de lire l ensemble des lignes d un fichier texte
+	 * @return : retourne l ensemble des lignes
+	 * @throws IOException
+	 */
 	public ArrayList<String> lecturesDesLignes() throws IOException {
 		while((this.ligne = this.lecteur.readLine()) != null) {
 			this.dico.add(ligne);

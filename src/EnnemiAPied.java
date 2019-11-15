@@ -27,6 +27,7 @@ public class EnnemiAPied extends Ennemi {
 		g.setColor(Color.black);
 		g.drawString(lettres, x, y - 25);
 		g.fillRect(x, y, 20, 20);
+		
 	}
 
 	/**

@@ -54,6 +54,7 @@ public class MainTest extends BasicGame {
 		this.genererEnnemi(this.dico);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		if (player.isEstVivant()) {
