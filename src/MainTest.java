@@ -118,5 +118,4 @@ public class MainTest extends BasicGame {
 			e.printStackTrace();
 		}
 	}
-
 }

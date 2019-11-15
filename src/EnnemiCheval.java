@@ -8,7 +8,8 @@ public class EnnemiCheval extends Ennemi {
 
 	/**
 	 * Constructeur par defaut de la classe EnnemiCheval
-	 * @param mot 
+	 * 
+	 * @param mot
 	 */
 	public EnnemiCheval(String mot) {
 		this.lettres = mot;

@@ -8,7 +8,7 @@ public class LireFichier {
 	private BufferedReader lecteur = null;
 	private String ligne;
 	private ArrayList<String> dico;
-	
+
 	/**
 	 * Constructeur surchargee
 	 * 
@@ -25,14 +25,15 @@ public class LireFichier {
 		}
 		this.dico = new ArrayList<String>();
 	}
-	
+
 	/**
 	 * Methode permettant de lire l ensemble des lignes d un fichier texte
+	 * 
 	 * @return : retourne l ensemble des lignes
 	 * @throws IOException
 	 */
 	public ArrayList<String> lecturesDesLignes() throws IOException {
-		while((this.ligne = this.lecteur.readLine()) != null) {
+		while ((this.ligne = this.lecteur.readLine()) != null) {
 			this.dico.add(ligne);
 		}
 		this.lecteur.close();
