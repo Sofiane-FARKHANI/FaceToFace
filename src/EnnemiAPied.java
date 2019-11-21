@@ -1,18 +1,23 @@
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class EnnemiAPied extends Ennemi {
 
+	private Image img;
 	/**
 	 * Constructeur par defaut de la classe EnnemiAPied
 	 * 
 	 * @param mot
+	 * @throws SlickException 
 	 */
-	public EnnemiAPied(String mot) {
+	public EnnemiAPied(String mot) throws SlickException {
 		lettres = mot;
 		x = 600;
 		y = (int) (Math.random() * 100 + 400);
 		vx = 20;
+		this.img=new Image("res/cowboy.png");
 	}
 
 	/**
@@ -24,7 +29,7 @@ public class EnnemiAPied extends Ennemi {
 	public void render(Graphics g) {
 		g.setColor(Color.black);
 		g.drawString(lettres, x, y - 25);
-		g.fillRect(x, y, 20, 20);
+		g.drawImage(this.img, x, y);
 
 	}
 
