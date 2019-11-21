@@ -40,6 +40,7 @@ public class MainTest extends BasicGame {
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		this.background = new Image("res/wild_west.png");
+		
 		this.fic = new LireFichier("res/DicoSansAccent.txt");
 		this.dico = new ArrayList<String>();
 		try {
@@ -87,7 +88,7 @@ public class MainTest extends BasicGame {
 		}
 	}
 
-	public void genererEnnemi(ArrayList<String> dictionnaire) {
+	public void genererEnnemi(ArrayList<String> dictionnaire) throws SlickException {
 		nbEnnemiVague = (int) (Math.random() * 3)+1;
 		for (int i = 0; i < nbEnnemiVague; i++) {
 			int emplacementMot = (int) (Math.random() * dictionnaire.size());
