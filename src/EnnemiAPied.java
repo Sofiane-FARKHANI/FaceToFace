@@ -3,19 +3,16 @@ import org.newdawn.slick.Graphics;
 
 public class EnnemiAPied extends Ennemi {
 
-	private String lettres;
-	private float x, y, vx;
-
 	/**
 	 * Constructeur par defaut de la classe EnnemiAPied
 	 * 
 	 * @param mot
 	 */
 	public EnnemiAPied(String mot) {
-		this.lettres = mot;
-		this.x = 600;
-		this.y = (int) (Math.random() * 100 + 400);
-		this.vx = 20;
+		lettres = mot;
+		x = 600;
+		y = (int) (Math.random() * 100 + 400);
+		vx = 20;
 	}
 
 	/**
@@ -38,8 +35,8 @@ public class EnnemiAPied extends Ennemi {
 	 */
 	@Override
 	public void update(int delta) {
-		if (this.x > 100)
-			this.x -= vx * ((float) delta / 1000);
+		if (x > 100)
+			x -= vx * ((float) delta / 1000);
 	}
 
 	/**
@@ -48,7 +45,7 @@ public class EnnemiAPied extends Ennemi {
 	 * @return : mot affiche au dessus de l ennemi
 	 */
 	public String getLettres() {
-		return this.lettres;
+		return lettres;
 	}
 
 	/**

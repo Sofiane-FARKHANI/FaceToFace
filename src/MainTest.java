@@ -88,7 +88,7 @@ public class MainTest extends BasicGame {
 	}
 
 	public void genererEnnemi(ArrayList<String> dictionnaire) {
-		nbEnnemiVague = (int) (Math.random() * player.getScore() + 1);
+		nbEnnemiVague = (int) (Math.random() * 3)+1;
 		for (int i = 0; i < nbEnnemiVague; i++) {
 			int emplacementMot = (int) (Math.random() * dictionnaire.size());
 			int typeEnnemi = (int) (Math.random() * 2);
