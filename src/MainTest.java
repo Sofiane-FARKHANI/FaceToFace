@@ -61,22 +61,13 @@ public class MainTest extends BasicGame {
 		if (player.isEstVivant()) {
 			for (int i = 0; i < ennemis.size(); i++) {
 				if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
-					if (ennemis.get(i) instanceof EnnemiAPied) {
-						if (saisiUser.getText().compareTo(((EnnemiAPied) ennemis.get(i)).getLettres()) == 0) {
-							player.setScore(player.getScore() + 1);
-							ennemis.remove(i);
-							saisiUser.setText("");
-							this.genererEnnemi(this.dico);
-							break;
-						}
-					} else if (ennemis.get(i) instanceof EnnemiCheval) {
-						if (saisiUser.getText().compareTo(((EnnemiCheval) ennemis.get(i)).getLettres()) == 0) {
-							player.setScore(player.getScore() + 1);
-							ennemis.remove(i);
-							saisiUser.setText("");
-							this.genererEnnemi(this.dico);
-							break;
-						}
+					System.out.println(saisiUser.getText().compareTo(ennemis.get(i).getLettres()));
+					if(saisiUser.getText().compareTo(ennemis.get(i).getLettres())==0) {
+						System.out.println("IDENTIQUE");
+						player.setScore(player.getScore() + 1);
+						ennemis.remove(i);
+						saisiUser.setText("");
+						this.genererEnnemi(this.dico);
 					}
 				}
 			}

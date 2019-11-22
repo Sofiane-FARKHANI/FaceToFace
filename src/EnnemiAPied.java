@@ -43,22 +43,4 @@ public class EnnemiAPied extends Ennemi {
 		if (x > 100)
 			x -= vx * ((float) delta / 1000);
 	}
-
-	/**
-	 * Ascesseur de mot associe a l ennemi
-	 * 
-	 * @return : mot affiche au dessus de l ennemi
-	 */
-	public String getLettres() {
-		return lettres;
-	}
-
-	/**
-	 * Ascesseur de la coordonnee x de l ennemi
-	 * 
-	 * @return : coordonnee x de l ennemi
-	 */
-	public float getX() {
-		return x;
-	}
 }
