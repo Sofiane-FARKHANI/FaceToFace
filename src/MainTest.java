@@ -40,7 +40,7 @@ public class MainTest extends BasicGame {
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		this.background = new Image("res/wild_west.png");
-		
+
 		this.fic = new LireFichier("res/DicoSansAccent.txt");
 		this.dico = new ArrayList<String>();
 		try {
@@ -59,33 +59,34 @@ public class MainTest extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		if (player.isEstVivant()) {
-			
-			for(Ennemi ennemi : ennemis) {
-				if(gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
-					if(saisiUser.getText().equals(ennemi.getLettres())) {
-						player.setScore(player.getScore()+1);
+
+			for (Ennemi ennemi : ennemis) {
+				if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
+					if (saisiUser.getText().equals(ennemi.getLettres())) {
+						player.setScore(player.getScore() + 1);
 						System.out.println("identique");
-						//ennemis.remove(ennemi);
+						// ennemis.remove(ennemi);
 						saisiUser.setText("");
-						//this.genererEnnemi(dico);
+						// this.genererEnnemi(dico);
 					}
 				}
 			}
 
-			for (int i = 0; i < ennemis.size(); i++) {
-				ennemis.get(i).update(delta);
-				player.tuerJoueur(ennemis.get(i));
+			for (Ennemi ennemi : ennemis) {
+				ennemi.update(delta);
+				player.tuerJoueur(ennemi);
 			}
 		}
 	}
 
 	/**
 	 * Methode permettant de generer un nouvel ennemi
+	 * 
 	 * @param dictionnaire
 	 * @throws SlickException
 	 */
 	public void genererEnnemi(ArrayList<String> dictionnaire) throws SlickException {
-		nbEnnemiVague = (int) (Math.random() * 3)+1;
+		nbEnnemiVague = (int) (Math.random() * 3) + 1;
 		for (int i = 0; i < nbEnnemiVague; i++) {
 			int emplacementMot = (int) (Math.random() * dictionnaire.size());
 			int typeEnnemi = (int) (Math.random() * 2);
