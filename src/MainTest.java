@@ -43,11 +43,14 @@ public class MainTest extends BasicGame {
 
 		this.fic = new LireFichier("res/DicoSansAccent.txt");
 		this.dico = new ArrayList<String>();
+		
+		// Capture d exception lors de la lecture du fichier txt
 		try {
 			this.dico = this.fic.lecturesDesLignes();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException err) {
+			err.printStackTrace();
 		}
+		
 		player = new Joueur();
 		saisiUser = new TextField(gc, gc.getDefaultFont(), 50, 620, 200, 30);
 		saisiUser.setFocus(true);
@@ -59,15 +62,15 @@ public class MainTest extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		if (player.isEstVivant()) {
-
-			for (Ennemi ennemi : ennemis) {
-				if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
-					if (saisiUser.getText().equals(ennemi.getLettres())) {
-						player.setScore(player.getScore() + 1);
-						System.out.println("identique");
-						// ennemis.remove(ennemi);
-						saisiUser.setText("");
-						// this.genererEnnemi(dico);
+			for(int i=ennemis.size()-1;i>=0;i--) {
+				if(!ennemis.isEmpty()) {
+					if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
+						if (ennemis.get(i).getLettres().equals(saisiUser.getText())) {
+							player.setScore(player.getScore() + 1);
+							saisiUser.setText("");
+							ennemis.remove(i);
+							this.genererEnnemi(dico);
+						}
 					}
 				}
 			}
