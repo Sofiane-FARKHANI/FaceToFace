@@ -1,18 +1,24 @@
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Joueur {
 
 	private boolean estVivant;
 	private int x, y, score;
+	private Image img, fondMsgMort;
 
 	/**
 	 * Constructeur par defaut de la classe Joueur
+	 * @throws SlickException 
 	 */
-	public Joueur() {
+	public Joueur() throws SlickException {
 		this.estVivant = true;
 		this.x = 100;
 		this.y = 500;
+		this.img = new Image("res/perso.png");
+		this.fondMsgMort=new Image("res/bulle.png");
 	}
 
 	/**
@@ -21,12 +27,13 @@ public class Joueur {
 	 * @param g : objet contenant l ensemble des methodes de rendu
 	 */
 	public void render(Graphics g) {
-		g.setColor(Color.magenta);
-		g.fillRect(x, y, 20, 20);
+		g.drawImage(img, x, y);
 		g.setColor(Color.white);
 		g.drawString("Scores : " + this.score, 700, 650);
 		if (!this.estVivant) {
-			g.drawString("Vous êtes nul !", 400, 650);
+			g.drawImage(fondMsgMort, x+20, y-60);
+			g.setColor(Color.black);
+			g.drawString("AIE !", x+45, y-45);
 		}
 	}
 
