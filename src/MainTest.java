@@ -18,12 +18,12 @@ public class MainTest extends BasicGame {
 
 	private ArrayList<Ennemi> ennemis;
 	private ArrayList<String> dico;
-	
+
 	private LireFichier fic;
-	
+
 	private Ennemi e;
 	private Joueur player;
-	
+
 	private int nbEnnemiVague;
 
 	public MainTest(String name) {
@@ -46,14 +46,14 @@ public class MainTest extends BasicGame {
 
 		this.fic = new LireFichier("res/DicoSansAccent.txt");
 		this.dico = new ArrayList<String>();
-		
+
 		// Capture d exception lors de la lecture du fichier txt
 		try {
 			this.dico = this.fic.lecturesDesLignes();
 		} catch (IOException err) {
 			err.printStackTrace();
 		}
-		
+
 		player = new Joueur();
 		saisiUser = new TextField(gc, gc.getDefaultFont(), 50, 620, 200, 30);
 		saisiUser.setFocus(true);
@@ -65,24 +65,22 @@ public class MainTest extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		if (player.isEstVivant()) {
-			
-			for(int i=ennemis.size()-1;i>=0;i--) {
-				if(!ennemis.isEmpty()) {
-					if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
-						if (ennemis.get(i).getLettres().equals(saisiUser.getText())) {
-							player.setScore(player.getScore() + 1);
-							saisiUser.setText("");
-							ennemis.remove(i);
-							this.genererEnnemi(dico);
-						}
+			if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
+				String res = saisiUser.getText();
+				for (int i = 0; i < ennemis.size(); i++) {
+					if (ennemis.get(i).getLettres().hashCode() == res.hashCode()) {
+						player.setScore(player.getScore() + 1);
+						saisiUser.setText("");
+						ennemis.remove(i);
+						this.genererEnnemi(dico);
 					}
 				}
 			}
+		}
 
-			for (Ennemi ennemi : ennemis) {
-				ennemi.update(delta);
-				player.tuerJoueur(ennemi);
-			}
+		for (Ennemi ennemi : ennemis) {
+			ennemi.update(delta);
+			player.tuerJoueur(ennemi);
 		}
 	}
 
