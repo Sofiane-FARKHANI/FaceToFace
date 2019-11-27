@@ -14,14 +14,17 @@ public class MainTest extends BasicGame {
 	// Site d origine de l image
 	// http://wallpaperswide.com/low_poly_wild_west-wallpapers.html
 	private Image background;
+	private TextField saisiUser;
 
 	private ArrayList<Ennemi> ennemis;
+	private ArrayList<String> dico;
+	
+	private LireFichier fic;
+	
 	private Ennemi e;
 	private Joueur player;
-	private TextField saisiUser;
+	
 	private int nbEnnemiVague;
-	private LireFichier fic;
-	private ArrayList<String> dico;
 
 	public MainTest(String name) {
 		super(name);
@@ -62,6 +65,7 @@ public class MainTest extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		if (player.isEstVivant()) {
+			
 			for(int i=ennemis.size()-1;i>=0;i--) {
 				if(!ennemis.isEmpty()) {
 					if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
