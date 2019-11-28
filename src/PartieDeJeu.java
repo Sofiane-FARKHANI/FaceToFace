@@ -1,17 +1,17 @@
 import java.io.IOException;
 import java.util.ArrayList;
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.gui.TextField;
+import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class MainTest extends BasicGame {
-
+public class PartieDeJeu extends BasicGameState {
+	
 	// Site d origine de l image
 	// http://wallpaperswide.com/low_poly_wild_west-wallpapers.html
 	private Image background;
@@ -25,24 +25,14 @@ public class MainTest extends BasicGame {
 	private Ennemi e;
 	private Joueur player;
 
-	private int nbEnnemiVague;
+	private int nbEnnemiVague, stateId=-1;
 
-	public MainTest(String name) {
-		super(name);
+	public PartieDeJeu(int stateId) {
+		this.stateId=stateId;
 	}
 
 	@Override
-	public void render(GameContainer gc, Graphics g) throws SlickException {
-		g.drawImage(this.background, 0, 0);
-		for (int i = 0; i < ennemis.size(); i++) {
-			ennemis.get(i).render(g);
-		}
-		player.render(g);
-		saisiUser.render(gc, g);
-	}
-
-	@Override
-	public void init(GameContainer gc) throws SlickException {
+	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.background = new Image("res/wild_west.png");
 
 		this.fic = new LireFichier("res/DicoSansAccent.txt");
@@ -61,10 +51,22 @@ public class MainTest extends BasicGame {
 		ennemis = new ArrayList<Ennemi>();
 
 		this.genererEnnemi(this.dico);
+
 	}
 
 	@Override
-	public void update(GameContainer gc, int delta) throws SlickException {
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+		g.drawImage(this.background, 0, 0);
+		for (int i = 0; i < ennemis.size(); i++) {
+			ennemis.get(i).render(g);
+		}
+		player.render(g);
+		saisiUser.render(gc, g);
+
+	}
+
+	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		if (player.isEstVivant()) {
 			if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
 				String res = saisiUser.getText();
@@ -83,8 +85,15 @@ public class MainTest extends BasicGame {
 			ennemi.update(delta);
 			player.tuerJoueur(ennemi);
 		}
+
 	}
 
+	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return this.stateId;
+	}
+	
 	/**
 	 * Methode permettant de generer un nouvel ennemi
 	 * 
@@ -105,17 +114,4 @@ public class MainTest extends BasicGame {
 		}
 	}
 
-	/**
-	 * Point d entree du programme
-	 * 
-	 * @throws IOException
-	 */
-	/*public static void main(String[] args) throws IOException, SlickException {
-		AppGameContainer app;
-		app = new AppGameContainer(new MainTest("FaceToFace"));
-		app.setDisplayMode(800, 700, false);
-		app.setShowFPS(false);
-		app.setTargetFrameRate(60);
-		app.start();
-	}*/
 }
