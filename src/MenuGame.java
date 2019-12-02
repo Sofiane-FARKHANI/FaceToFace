@@ -11,18 +11,19 @@ import org.newdawn.slick.state.StateBasedGame;
 public class MenuGame extends BasicGameState implements ComponentListener{
 
 	private MouseOverArea btnPlay, btnExit, btnParam;
-	private Image backgroundBtnPlay, backgroundBtnExit, backgroundBtnParam, farWestWallpaper, nomJeu;
+	private Image backgroundBtnPlay, backgroundBtnExit, backgroundBtnParam, farWestWallpaper, nomJeu, spaceWallpaper;
 	private boolean isPressBtnParam, isPressBtnPlay;
 	private GameContainer jeu;
 	private int stateId=-1;
-	private String typeGame;
+	private String typeGame="FW";
+	private PartieDeJeu partie;
 	
-	public MenuGame(GameContainer gc, int stateId) {
+	public MenuGame(GameContainer gc, int stateId, PartieDeJeu partie) {
 		jeu=gc;
 		this.isPressBtnParam=false;
 		this.isPressBtnPlay=false;
 		this.stateId=stateId;
-		this.typeGame="FW";
+		this.partie=partie;
 	}
 
 	@Override
@@ -32,6 +33,8 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 		backgroundBtnExit=new Image("res/btn2.png");
 		backgroundBtnParam=new Image("res/btn3.png");
 		nomJeu=new Image("res/nomJeu.png").getScaledCopy(0.7f);
+		spaceWallpaper=new Image("res/space_wallpaper.jpg").getScaledCopy(1.2f);
+		
 		
 		btnPlay=new MouseOverArea(gc, backgroundBtnPlay, 50,600,100,100,this);
 		btnParam=new MouseOverArea(gc, backgroundBtnParam, 330, 600,100,100, this);
@@ -42,6 +45,9 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		if(typeGame=="FW")
 			g.drawImage(farWestWallpaper,0,0);
+		else
+			g.drawImage(spaceWallpaper,0,0);
+		
 		btnPlay.render(gc, g);
 		btnParam.render(gc, g);
 		btnExit.render(gc, g);
@@ -58,6 +64,8 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 			this.isPressBtnPlay=false;
 			sbg.enterState(2);
 		}
+		
+		partie.setTypeGame(typeGame);
 
 	}
 

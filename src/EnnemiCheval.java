@@ -14,12 +14,15 @@ public class EnnemiCheval extends Ennemi {
 	 * @param mot
 	 * @throws SlickException 
 	 */
-	public EnnemiCheval(String mot) throws SlickException {
+	public EnnemiCheval(String mot, String typeGame) throws SlickException {
 		lettres = mot;
 		x = 600;
 		y = (int) (Math.random() * 100 + 400);
 		vx = 40;
-		this.img = new Image("res/cowboy__horse.png");
+		if(typeGame=="FW")
+			this.img = new Image("res/cowboy__horse.png");
+		else
+			this.img=new Image("res/alien_volant.png").getScaledCopy(0.2f);
 	}
 
 	/**

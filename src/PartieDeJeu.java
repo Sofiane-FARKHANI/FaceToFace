@@ -24,9 +24,10 @@ public class PartieDeJeu extends BasicGameState {
 
 	private Ennemi e;
 	private Joueur player;
+	private String typeGame;
 
 	private int nbEnnemiVague, stateId=-1;
-
+	
 	public PartieDeJeu(int stateId) {
 		this.stateId=stateId;
 	}
@@ -107,12 +108,16 @@ public class PartieDeJeu extends BasicGameState {
 			int emplacementMot = (int) (Math.random() * dictionnaire.size());
 			int typeEnnemi = (int) (Math.random() * 2);
 			if (typeEnnemi == 0) {
-				e = new EnnemiAPied(dictionnaire.get(emplacementMot));
+				e = new EnnemiAPied(dictionnaire.get(emplacementMot), this.typeGame);
 			} else {
-				e = new EnnemiCheval(dictionnaire.get(emplacementMot));
+				e = new EnnemiCheval(dictionnaire.get(emplacementMot), this.typeGame);
 			}
 			ennemis.add(e);
 		}
+	}
+	
+	public void setTypeGame(String typeGame){
+		this.typeGame=typeGame;
 	}
 
 }

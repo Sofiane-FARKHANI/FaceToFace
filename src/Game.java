@@ -4,6 +4,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Game extends StateBasedGame {
+	
+	private PartieDeJeu partie=new PartieDeJeu(2);
 
 	public Game(String name) {
 		super(name);
@@ -12,9 +14,9 @@ public class Game extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
-		addState(new MenuGame(gc,0));
+		addState(new MenuGame(gc,0, partie));
 		addState(new Parametre(1));
-		addState(new PartieDeJeu(2));
+		addState(partie);
 		addState(new EcranFinJeu(3));
 
 	}

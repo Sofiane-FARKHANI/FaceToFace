@@ -12,12 +12,15 @@ public class EnnemiAPied extends Ennemi {
 	 * @param mot
 	 * @throws SlickException 
 	 */
-	public EnnemiAPied(String mot) throws SlickException {
+	public EnnemiAPied(String mot, String typeGame) throws SlickException {
 		lettres = mot;
 		x = 600;
 		y = (int) (Math.random() * 100 + 400);
 		vx = 20;
-		this.img=new Image("res/cowboy.png");
+		if(typeGame=="FW")
+			this.img=new Image("res/cowboy.png");
+		else
+			this.img=new Image("res/alien-gun.png").getScaledCopy(0.1f);
 	}
 
 	/**
