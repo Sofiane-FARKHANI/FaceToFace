@@ -15,6 +15,7 @@ public class Game extends StateBasedGame {
 		addState(new MenuGame(gc,0));
 		addState(new Parametre(1));
 		addState(new PartieDeJeu(2));
+		addState(new EcranFinJeu(3));
 
 	}
 

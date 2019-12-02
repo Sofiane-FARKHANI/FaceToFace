@@ -11,7 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class MenuGame extends BasicGameState implements ComponentListener{
 
 	private MouseOverArea btnPlay, btnExit, btnParam;
-	private Image backgroundBtnPlay, backgroundBtnExit, backgroundBtnParam, farWestWallpaper, spaceWallpaper;
+	private Image backgroundBtnPlay, backgroundBtnExit, backgroundBtnParam, farWestWallpaper;
 	private boolean isPressBtnParam, isPressBtnPlay;
 	private GameContainer jeu;
 	private int stateId=-1;
@@ -35,14 +35,12 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 		btnPlay=new MouseOverArea(gc, backgroundBtnPlay, 50,600,100,100,this);
 		btnParam=new MouseOverArea(gc, backgroundBtnParam, 330, 600,100,100, this);
 		btnExit=new MouseOverArea(gc, backgroundBtnExit,620 , 600, 100, 100, this);
-
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		if(typeGame=="FW") {
-			g.drawImage(farWestWallpaper, 0, 0);
-		}
+		if(typeGame=="FW")
+			g.drawImage(farWestWallpaper,0,0);
 		btnPlay.render(gc, g);
 		btnParam.render(gc, g);
 		btnExit.render(gc, g);
@@ -68,8 +66,9 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 
 	@Override
 	public void componentActivated(AbstractComponent source) {
-		if(source==btnPlay) 
-			this.isPressBtnPlay=true;
+		if(source==this.btnPlay) 
+			//this.isPressBtnPlay=true;
+			System.out.println("PRESS");
 		else if(source==btnParam)
 			isPressBtnParam=true;
 		else if(source==btnExit)
