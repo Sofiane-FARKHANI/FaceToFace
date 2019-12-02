@@ -11,7 +11,7 @@ public class EcranFinJeu extends BasicGameState implements ComponentListener {
 	
 	// Le stateID est de 3 lors du fonctionnement
 	private int stateID=-1, delai;
-	//private Image gameOver;
+	private Image gameOver;
 
 	public EcranFinJeu(int stateID) {
 		this.stateID=stateID;
@@ -20,21 +20,21 @@ public class EcranFinJeu extends BasicGameState implements ComponentListener {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		
-		//this.gameOver=new Image("res/game-over-screen.png");
+		this.gameOver=new Image("res/game-over-screen.png").getScaledCopy(800, 700);
 		this.delai=0;
 
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		//g.drawImage(gameOver,0,0);
+		g.drawImage(gameOver,0,0);
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		delai+=delta;
-		/*if(delai>=2000)
-			sbg.enterState(0);*/
+		if(delai>=6000)
+			sbg.enterState(0);
 	}
 
 	@Override

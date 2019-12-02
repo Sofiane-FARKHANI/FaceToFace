@@ -67,8 +67,7 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 	@Override
 	public void componentActivated(AbstractComponent source) {
 		if(source==this.btnPlay) 
-			//this.isPressBtnPlay=true;
-			System.out.println("PRESS");
+			this.isPressBtnPlay=true;
 		else if(source==btnParam)
 			isPressBtnParam=true;
 		else if(source==btnExit)

@@ -77,6 +77,8 @@ public class MainTest extends BasicGame {
 					}
 				}
 			}
+		} else {
+			
 		}
 
 		for (Ennemi ennemi : ennemis) {

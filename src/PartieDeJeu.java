@@ -79,6 +79,8 @@ public class PartieDeJeu extends BasicGameState {
 					}
 				}
 			}
+		} else {
+			sbg.enterState(3);
 		}
 
 		for (Ennemi ennemi : ennemis) {
