@@ -11,7 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class MenuGame extends BasicGameState implements ComponentListener{
 
 	private MouseOverArea btnPlay, btnExit, btnParam;
-	private Image backgroundBtnPlay, backgroundBtnExit, backgroundBtnParam, farWestWallpaper;
+	private Image backgroundBtnPlay, backgroundBtnExit, backgroundBtnParam, farWestWallpaper, nomJeu;
 	private boolean isPressBtnParam, isPressBtnPlay;
 	private GameContainer jeu;
 	private int stateId=-1;
@@ -31,6 +31,7 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 		backgroundBtnPlay=new Image("res/btn1.png");
 		backgroundBtnExit=new Image("res/btn2.png");
 		backgroundBtnParam=new Image("res/btn3.png");
+		nomJeu=new Image("res/nomJeu.png").getScaledCopy(0.7f);
 		
 		btnPlay=new MouseOverArea(gc, backgroundBtnPlay, 50,600,100,100,this);
 		btnParam=new MouseOverArea(gc, backgroundBtnParam, 330, 600,100,100, this);
@@ -44,6 +45,8 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 		btnPlay.render(gc, g);
 		btnParam.render(gc, g);
 		btnExit.render(gc, g);
+		g.drawImage(nomJeu, 0, 0);
+		
 	}
 
 	@Override
