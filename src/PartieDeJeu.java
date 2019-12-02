@@ -62,7 +62,6 @@ public class PartieDeJeu extends BasicGameState {
 		}
 		player.render(g);
 		saisiUser.render(gc, g);
-
 	}
 
 	@Override
