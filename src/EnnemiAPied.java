@@ -17,7 +17,7 @@ public class EnnemiAPied extends Ennemi {
 		x = 600;
 		y = (int) (Math.random() * 100 + 400);
 		vx = 20;
-		if(typeGame=="FW")
+		if(typeGame.equalsIgnoreCase("FW"))
 			this.img=new Image("res/cowboy.png");
 		else
 			this.img=new Image("res/alien-gun.png").getScaledCopy(0.1f);

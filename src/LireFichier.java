@@ -39,4 +39,12 @@ public class LireFichier {
 		this.lecteur.close();
 		return this.dico;
 	}
+	
+	public String lectureDUneLigne() throws IOException {
+		while ((this.ligne = this.lecteur.readLine()) != null) {
+			return this.ligne;
+		}
+		this.lecteur.close();
+		return "Error";
+	}
 }

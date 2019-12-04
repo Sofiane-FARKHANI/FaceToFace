@@ -26,6 +26,15 @@ public abstract class Ennemi {
 		return this.x;
 	}
 	
+	public void setVx(float vx) {
+		if(vx>0)
+			this.vx=vx;
+	}
+	
+	public float getVx() {
+		return this.vx;
+	}
+	
 	public abstract void render(Graphics g);
 	public abstract void update(int delta);
 	

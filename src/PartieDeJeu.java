@@ -14,34 +14,40 @@ public class PartieDeJeu extends BasicGameState {
 	
 	// Site d origine de l image
 	// http://wallpaperswide.com/low_poly_wild_west-wallpapers.html
-	private Image background;
+	private Image backgroundFW, backgroundSP;
 	private TextField saisiUser;
 
 	private ArrayList<Ennemi> ennemis;
 	private ArrayList<String> dico;
 
-	private LireFichier fic;
+	private LireFichier fic, infoJeu;
 
 	private Ennemi e;
 	private Joueur player;
 	private String typeGame;
+	
+	private boolean isModify;
 
 	private int nbEnnemiVague, stateId=-1;
 	
-	public PartieDeJeu(int stateId) {
+	public PartieDeJeu(int stateId, String typeGame) {
 		this.stateId=stateId;
+		this.typeGame=typeGame;
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		this.background = new Image("res/wild_west.png");
+		this.backgroundFW = new Image("res/wild_west.png");
+		this.backgroundSP = new Image("res/space_wallpaper.jpg").getScaledCopy(1.2f);
 
 		this.fic = new LireFichier("res/DicoSansAccent.txt");
+		this.infoJeu = new LireFichier("res/info.txt");
 		this.dico = new ArrayList<String>();
 
 		// Capture d exception lors de la lecture du fichier txt
 		try {
 			this.dico = this.fic.lecturesDesLignes();
+			this.typeGame = this.infoJeu.lectureDUneLigne();
 		} catch (IOException err) {
 			err.printStackTrace();
 		}
@@ -57,7 +63,11 @@ public class PartieDeJeu extends BasicGameState {
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		g.drawImage(this.background, 0, 0);
+		if(typeGame.equalsIgnoreCase("FW"))
+			g.drawImage(this.backgroundFW, 0, 0);
+		else
+			g.drawImage(this.backgroundSP, 0, 0);
+		
 		for (int i = 0; i < ennemis.size(); i++) {
 			ennemis.get(i).render(g);
 		}
@@ -67,6 +77,16 @@ public class PartieDeJeu extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		
+		if(!isModify) {
+			try {
+				typeGame = infoJeu.lectureDUneLigne();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			isModify=true;
+		}
+		
 		if (player.isEstVivant()) {
 			if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
 				String res = saisiUser.getText();
@@ -76,6 +96,10 @@ public class PartieDeJeu extends BasicGameState {
 						saisiUser.setText("");
 						ennemis.remove(i);
 						this.genererEnnemi(dico);
+					}else {
+						for(int j=0; j<ennemis.size();j++) {
+							ennemis.get(j).setVx(ennemis.get(j).getVx()*1.25f);
+						}
 					}
 				}
 			}
@@ -87,12 +111,10 @@ public class PartieDeJeu extends BasicGameState {
 			ennemi.update(delta);
 			player.tuerJoueur(ennemi);
 		}
-
 	}
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return this.stateId;
 	}
 	
@@ -107,17 +129,12 @@ public class PartieDeJeu extends BasicGameState {
 		for (int i = 0; i < nbEnnemiVague; i++) {
 			int emplacementMot = (int) (Math.random() * dictionnaire.size());
 			int typeEnnemi = (int) (Math.random() * 2);
-			if (typeEnnemi == 0) {
+			if (typeEnnemi == 0)
 				e = new EnnemiAPied(dictionnaire.get(emplacementMot), this.typeGame);
-			} else {
+			else
 				e = new EnnemiCheval(dictionnaire.get(emplacementMot), this.typeGame);
-			}
 			ennemis.add(e);
 		}
-	}
-	
-	public void setTypeGame(String typeGame){
-		this.typeGame=typeGame;
 	}
 
 }

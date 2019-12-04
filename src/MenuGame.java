@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.util.ArrayList;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -12,18 +15,19 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 
 	private MouseOverArea btnPlay, btnExit, btnParam;
 	private Image backgroundBtnPlay, backgroundBtnExit, backgroundBtnParam, farWestWallpaper, nomJeu, spaceWallpaper;
-	private boolean isPressBtnParam, isPressBtnPlay;
+	private boolean isPressBtnParam, isPressBtnPlay, isModify, paramIsOpen;
 	private GameContainer jeu;
 	private int stateId=-1;
-	private String typeGame="FW";
-	private PartieDeJeu partie;
+	private String typeGame;
+	private LireFichier file;
 	
-	public MenuGame(GameContainer gc, int stateId, PartieDeJeu partie) {
+	public MenuGame(GameContainer gc, int stateId) {
 		jeu=gc;
 		this.isPressBtnParam=false;
 		this.isPressBtnPlay=false;
 		this.stateId=stateId;
-		this.partie=partie;
+		this.isModify=false;
+		this.paramIsOpen=false;
 	}
 
 	@Override
@@ -34,8 +38,12 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 		backgroundBtnParam=new Image("res/btn3.png");
 		nomJeu=new Image("res/nomJeu.png").getScaledCopy(0.7f);
 		spaceWallpaper=new Image("res/space_wallpaper.jpg").getScaledCopy(1.2f);
-		
-		
+		file=new LireFichier("res/info.txt");
+		try {
+			typeGame = file.lectureDUneLigne();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		btnPlay=new MouseOverArea(gc, backgroundBtnPlay, 50,600,100,100,this);
 		btnParam=new MouseOverArea(gc, backgroundBtnParam, 330, 600,100,100, this);
 		btnExit=new MouseOverArea(gc, backgroundBtnExit,620 , 600, 100, 100, this);
@@ -43,7 +51,7 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		if(typeGame=="FW")
+		if(typeGame.equalsIgnoreCase("FW"))
 			g.drawImage(farWestWallpaper,0,0);
 		else
 			g.drawImage(spaceWallpaper,0,0);
@@ -57,6 +65,15 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		if(!isModify && paramIsOpen) {
+			try {
+				typeGame = file.lectureDUneLigne();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			isModify=true;
+		}
+		
 		if(isPressBtnParam) {
 			this.isPressBtnParam=false;
 			sbg.enterState(1);
@@ -64,9 +81,6 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 			this.isPressBtnPlay=false;
 			sbg.enterState(2);
 		}
-		
-		partie.setTypeGame(typeGame);
-
 	}
 
 	@Override
@@ -79,9 +93,10 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 	public void componentActivated(AbstractComponent source) {
 		if(source==this.btnPlay) 
 			this.isPressBtnPlay=true;
-		else if(source==btnParam)
+		else if(source==btnParam) {
 			isPressBtnParam=true;
-		else if(source==btnExit)
+			paramIsOpen=true;
+		} else if(source==btnExit)
 			jeu.exit();
 		
 	}
