@@ -26,21 +26,18 @@ public class PartieDeJeu extends BasicGameState {
 	private Ennemi e;
 	private Joueur player;
 	private String typeGame;
-	
-	private boolean isModify;
 
 	private int nbEnnemiVague, stateId=-1;
 	
 	public PartieDeJeu(int stateId) {
 		this.stateId=stateId;
-		this.isModify=false;
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.backgroundFW = new Image("res/wild_west.png");
 		this.backgroundSP = new Image("res/space_wallpaper.jpg").getScaledCopy(1.2f);
-
+		
 		this.fic = new LireFichier("res/DicoSansAccent.txt");
 		this.infoJeu = new LireFichier("res/info.txt");
 		this.dico = new ArrayList<String>();

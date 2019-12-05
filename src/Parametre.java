@@ -92,7 +92,6 @@ public class Parametre extends BasicGameState implements ComponentListener {
 			this.isPressBtnBack=true;
 		else if(source==modeFW) {
 			this.isPressBtnModeFW=true;
-			System.out.println("FW");
 			if(!typeGame.equalsIgnoreCase("FW")) {
 				lignes = Arrays.asList("FW");
 				try {
@@ -102,7 +101,6 @@ public class Parametre extends BasicGameState implements ComponentListener {
 				}
 			}
 		} else if(source==modeSP) {
-			System.out.println("SP");
 			if(!typeGame.equalsIgnoreCase("SP")) {
 				lignes = Arrays.asList("SP");
 				try {

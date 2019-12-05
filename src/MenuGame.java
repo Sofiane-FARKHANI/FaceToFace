@@ -15,7 +15,7 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 
 	private MouseOverArea btnPlay, btnExit, btnParam;
 	private Image backgroundBtnPlay, backgroundBtnExit, backgroundBtnParam, farWestWallpaper, nomJeu, spaceWallpaper;
-	private boolean isPressBtnParam, isPressBtnPlay, isModify, paramIsOpen;
+	private boolean isPressBtnParam, isPressBtnPlay;
 	private GameContainer jeu;
 	private int stateId=-1;
 	private String typeGame;
@@ -26,8 +26,6 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 		this.isPressBtnParam=false;
 		this.isPressBtnPlay=false;
 		this.stateId=stateId;
-		this.isModify=false;
-		this.paramIsOpen=false;
 	}
 
 	@Override
@@ -89,7 +87,6 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 			this.isPressBtnPlay=true;
 		else if(source==btnParam) {
 			isPressBtnParam=true;
-			paramIsOpen=true;
 		} else if(source==btnExit)
 			jeu.exit();
 		
