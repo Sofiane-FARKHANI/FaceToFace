@@ -4,15 +4,13 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.gui.AbstractComponent;
-import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class EcranFinJeu extends BasicGameState {
 	
 	// Le stateID est de 3 lors du fonctionnement
-	private int stateID=-1, delai;
+	private int stateID=-1;
 	private Image gameOver;
 
 	public EcranFinJeu(int stateID) {
@@ -23,7 +21,6 @@ public class EcranFinJeu extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		
 		this.gameOver=new Image("res/game-over-screen.png").getScaledCopy(600, 700);
-		this.delai=0;
 
 	}
 
