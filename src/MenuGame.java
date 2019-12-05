@@ -1,4 +1,6 @@
 import java.io.IOException;
+
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -13,14 +15,12 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 
 	private MouseOverArea btnPlay, btnExit, btnParam;
 	private Image backgroundBtnPlay, backgroundBtnExit, backgroundBtnParam, farWestWallpaper, nomJeu, spaceWallpaper;
-	private boolean isPressBtnParam, isPressBtnPlay;
-	private GameContainer jeu;
+	private boolean isPressBtnParam, isPressBtnPlay, isPressBtnExit;
 	private int stateId=-1;
 	private String typeGame;
 	private LireFichier file;
 	
-	public MenuGame(GameContainer gc, int stateId) {
-		jeu=gc;
+	public MenuGame(int stateId) {
 		this.isPressBtnParam=false;
 		this.isPressBtnPlay=false;
 		this.stateId=stateId;
@@ -47,6 +47,10 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+		
+		if(g.getBackground()!=Color.black)
+			g.setBackground(Color.black);
+		
 		if(typeGame.equalsIgnoreCase("FW"))
 			g.drawImage(farWestWallpaper,0,0);
 		else
@@ -70,6 +74,9 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 			this.isPressBtnPlay=false;
 			sbg.getState(2).init(gc,sbg);
 			sbg.enterState(2);
+		} else if(isPressBtnExit) {
+			this.isPressBtnExit=false;
+			sbg.enterState(4);
 		}
 	}
 
@@ -86,7 +93,7 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 		else if(source==btnParam) {
 			isPressBtnParam=true;
 		} else if(source==btnExit)
-			jeu.exit();
+			isPressBtnExit=true;
 		
 	}
 }
