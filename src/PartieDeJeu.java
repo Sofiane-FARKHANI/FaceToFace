@@ -5,6 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
@@ -30,9 +31,9 @@ public class PartieDeJeu extends BasicGameState {
 
 	private int nbEnnemiVague, stateId=-1;
 	
-	public PartieDeJeu(int stateId, String typeGame) {
+	public PartieDeJeu(int stateId) {
 		this.stateId=stateId;
-		this.typeGame=typeGame;
+		this.isModify=false;
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class PartieDeJeu extends BasicGameState {
 		this.fic = new LireFichier("res/DicoSansAccent.txt");
 		this.infoJeu = new LireFichier("res/info.txt");
 		this.dico = new ArrayList<String>();
-
+		
 		// Capture d exception lors de la lecture du fichier txt
 		try {
 			this.dico = this.fic.lecturesDesLignes();
@@ -52,17 +53,17 @@ public class PartieDeJeu extends BasicGameState {
 			err.printStackTrace();
 		}
 
-		player = new Joueur();
+		player = new Joueur(typeGame);
 		saisiUser = new TextField(gc, gc.getDefaultFont(), 50, 620, 200, 30);
 		saisiUser.setFocus(true);
 		ennemis = new ArrayList<Ennemi>();
 
 		this.genererEnnemi(this.dico);
-
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+		
 		if(typeGame.equalsIgnoreCase("FW"))
 			g.drawImage(this.backgroundFW, 0, 0);
 		else
@@ -77,15 +78,6 @@ public class PartieDeJeu extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		
-		if(!isModify) {
-			try {
-				typeGame = infoJeu.lectureDUneLigne();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			isModify=true;
-		}
 		
 		if (player.isEstVivant()) {
 			if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {

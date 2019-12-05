@@ -13,7 +13,7 @@ public class Game extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
 		addState(new MenuGame(gc,0));
-		addState(new PartieDeJeu(2,"FW"));
+		addState(new PartieDeJeu(2));
 		addState(new Parametre(1));
 		addState(new EcranFinJeu(3));
 

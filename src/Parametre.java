@@ -75,6 +75,7 @@ public class Parametre extends BasicGameState implements ComponentListener {
 			this.isPressBtnBack=false;
 			this.isPressBtnModeFW=false;
 			this.isPressBtnModeSP=false;
+			sbg.getState(0).init(gc,sbg);
 			sbg.enterState(0);
 		}
 	}

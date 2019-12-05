@@ -65,20 +65,14 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		if(!isModify && paramIsOpen) {
-			try {
-				typeGame = file.lectureDUneLigne();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			isModify=true;
-		}
 		
 		if(isPressBtnParam) {
 			this.isPressBtnParam=false;
+			sbg.getState(1).init(gc,sbg);
 			sbg.enterState(1);
 		} else if(isPressBtnPlay) {
 			this.isPressBtnPlay=false;
+			sbg.getState(2).init(gc,sbg);
 			sbg.enterState(2);
 		}
 	}
