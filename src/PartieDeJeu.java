@@ -70,6 +70,7 @@ public class PartieDeJeu extends BasicGameState {
 		}
 		player.render(g);
 		saisiUser.render(gc, g);
+		saisiUser.setFocus(true);
 	}
 
 	@Override
@@ -79,14 +80,32 @@ public class PartieDeJeu extends BasicGameState {
 			if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
 				String res = saisiUser.getText();
 				for (int i = 0; i < ennemis.size(); i++) {
-					if (ennemis.get(i).getLettres().hashCode() == res.hashCode()) {
-						player.setScore(player.getScore() + 1);
-						saisiUser.setText("");
-						ennemis.remove(i);
-						this.genererEnnemi(dico);
-					}else {
-						for(int j=0; j<ennemis.size();j++) {
-							ennemis.get(j).setVx(ennemis.get(j).getVx()*1.25f);
+					if (ennemis.get(i) instanceof Boss) {
+						if(((Boss) ennemis.get(i)).comparaisonMotAfficher(res)) {
+							if(((Boss) ennemis.get(i)).nbMotRestant()==1) {
+								ennemis.remove(i);
+								player.setScore(player.getScore()+5);
+								saisiUser.setText("");
+							}
+							else {
+								((Boss) ennemis.get(i)).supprMot();
+								saisiUser.setText("");
+							}
+						} else {
+							for(int j=0; j<ennemis.size();j++) {
+								ennemis.get(j).setVx(ennemis.get(j).getVx()*1.25f);
+							}
+						}
+							
+					} else {
+						if (ennemis.get(i).getLettres().hashCode() == res.hashCode()) {
+							player.setScore(player.getScore() + 1);
+							saisiUser.setText("");
+							ennemis.remove(i);
+						}else {
+							for(int j=0; j<ennemis.size();j++) {
+								ennemis.get(j).setVx(ennemis.get(j).getVx()*1.25f);
+							}
 						}
 					}
 				}
@@ -101,6 +120,9 @@ public class PartieDeJeu extends BasicGameState {
 		}
 	}
 
+	/**
+	 * Méthode retournant l'identifiant de l'état
+	 */
 	@Override
 	public int getID() {
 		return this.stateId;
@@ -116,11 +138,21 @@ public class PartieDeJeu extends BasicGameState {
 		nbEnnemiVague = (int) (Math.random() * 3) + 1;
 		for (int i = 0; i < nbEnnemiVague; i++) {
 			int emplacementMot = (int) (Math.random() * dictionnaire.size());
-			int typeEnnemi = (int) (Math.random() * 2);
-			if (typeEnnemi == 0)
+			int typeEnnemi = (int) (Math.random() * 3);
+			switch (typeEnnemi) {
+			case 0:
 				e = new EnnemiAPied(dictionnaire.get(emplacementMot), this.typeGame);
-			else
+				break;
+			case 1:
 				e = new EnnemiCheval(dictionnaire.get(emplacementMot), this.typeGame);
+				break;
+			case 2:
+				e = new Boss(dictionnaire, this.typeGame);
+				break;
+			default:
+				e = new EnnemiAPied(dictionnaire.get(emplacementMot), this.typeGame);
+			}
+				
 			ennemis.add(e);
 		}
 	}
