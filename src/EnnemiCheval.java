@@ -21,8 +21,10 @@ public class EnnemiCheval extends Ennemi {
 		vx = 40;
 		if(typeGame.equalsIgnoreCase("FW"))
 			this.img = new Image("res/cowboy__horse.png");
-		else
+		else if(typeGame.equalsIgnoreCase("SP"))
 			this.img=new Image("res/alien_volant.png").getScaledCopy(0.2f);
+		else
+			this.img=new Image("res/patrick.png");
 	}
 
 	/**

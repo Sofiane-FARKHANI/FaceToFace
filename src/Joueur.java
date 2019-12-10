@@ -20,9 +20,12 @@ public class Joueur {
 		if(typeGame.equalsIgnoreCase("FW")) {
 			this.img = new Image("res/yakari.png").getScaledCopy(0.3f);
 			this.y = 500;
-		} else {
+		} else if(typeGame.equalsIgnoreCase("SP")){
 			this.img=new Image("res/zinzin.png").getScaledCopy(0.2f);
 			this.y = 400;
+		} else {
+			this.img=new Image("res/bob.png");
+			this.y=400;
 		}
 		this.fondMsgMort=new Image("res/bulle.png");
 	}

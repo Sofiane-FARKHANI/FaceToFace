@@ -14,7 +14,7 @@ public class PartieDeJeu extends BasicGameState {
 	
 	// Site d origine de l image
 	// http://wallpaperswide.com/low_poly_wild_west-wallpapers.html
-	private Image backgroundFW, backgroundSP;
+	private Image backgroundFW, backgroundSP, backgroundBS;
 	private TextField saisiUser;
 
 	private ArrayList<Ennemi> ennemis;
@@ -36,6 +36,7 @@ public class PartieDeJeu extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.backgroundFW = new Image("res/wild_west.png");
 		this.backgroundSP = new Image("res/space_wallpaper.jpg").getScaledCopy(1.2f);
+		this.backgroundBS=new Image("res/bikini_bottom.png").getScaledCopy(800, 600);
 		
 		this.fic = new LireFichier("res/DicoSansAccent.txt");
 		this.infoJeu = new LireFichier("res/info.txt");
@@ -62,8 +63,10 @@ public class PartieDeJeu extends BasicGameState {
 		
 		if(typeGame.equalsIgnoreCase("FW"))
 			g.drawImage(this.backgroundFW, 0, 0);
-		else
+		else if(typeGame.equalsIgnoreCase("SP"))
 			g.drawImage(this.backgroundSP, 0, 0);
+		else
+			g.drawImage(backgroundBS, 0, 0);
 		
 		for (int i = 0; i < ennemis.size(); i++) {
 			ennemis.get(i).render(g);

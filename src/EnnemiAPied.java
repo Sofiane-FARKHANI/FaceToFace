@@ -19,8 +19,10 @@ public class EnnemiAPied extends Ennemi {
 		vx = 20;
 		if(typeGame.equalsIgnoreCase("FW"))
 			this.img=new Image("res/cowboy.png");
-		else
+		else if(typeGame.equalsIgnoreCase("SP"))
 			this.img=new Image("res/alien-gun.png").getScaledCopy(0.1f);
+		else
+			this.img=new Image("res/sandy.png").getScaledCopy(0.2f);
 	}
 
 	/**

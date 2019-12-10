@@ -18,10 +18,10 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class Parametre extends BasicGameState implements ComponentListener {
 	
-	private MouseOverArea btnBack, modeFW, modeSP;
+	private MouseOverArea btnBack, modeFW, modeSP, modeBob;
 	private int stateId = -1;
-	private boolean isPressBtnBack, isPressBtnModeFW, isPressBtnModeSP;
-	private Image backgroundBtnBack, FWMode, SPMode, farWestWallpaper, spaceWallpaper;
+	private boolean isPressBtnBack, isPressBtnModeFW, isPressBtnModeSP,isPressBtnModeBob;
+	private Image backgroundBtnBack, FWMode, SPMode, farWestWallpaper, spaceWallpaper, bobMode, BSMode;
 	private LireFichier fileReader;
 	private String typeGame;
 	private Path fichier = Paths.get("res/info.txt");
@@ -32,6 +32,7 @@ public class Parametre extends BasicGameState implements ComponentListener {
 		this.isPressBtnBack=false;
 		this.isPressBtnModeFW=false;
 		this.isPressBtnModeSP=false;
+		this.isPressBtnModeBob=false;
 	}
 
 	@Override
@@ -39,9 +40,12 @@ public class Parametre extends BasicGameState implements ComponentListener {
 		backgroundBtnBack=new Image("res/btn3Back.png");
 		FWMode=new Image("res/farWestMode.png");
 		SPMode=new Image("res/spaceMode.png");
+		bobMode=new Image("res/bobLand.png");
+		BSMode=new Image("res/bikini_bottom.png").getScaledCopy(800, 600);
 		btnBack=new MouseOverArea(gc, backgroundBtnBack, 0,0,100,100,this);
 		modeFW=new MouseOverArea(gc, FWMode,300,300,100,100, this);
 		modeSP=new MouseOverArea(gc, SPMode, 400, 300, 100, 100, this);
+		modeBob=new MouseOverArea(gc, bobMode, 500, 300, 100, 100, this);
 		fileReader=new LireFichier("res/info.txt");
 		
 		farWestWallpaper=new Image("res/wild_west.png");
@@ -60,21 +64,25 @@ public class Parametre extends BasicGameState implements ComponentListener {
 		
 		if(typeGame.equalsIgnoreCase("FW"))
 			g.drawImage(farWestWallpaper,0,0);
-		else
+		else if (typeGame.equalsIgnoreCase("SP"))
 			g.drawImage(spaceWallpaper,0,0);
+		else
+			g.drawImage(BSMode, 0, 0);
 		
 		btnBack.render(gc, g);
 		modeFW.render(gc, g);
 		modeSP.render(gc, g);
+		modeBob.render(gc,g);
 
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		if(isPressBtnBack || isPressBtnModeFW || isPressBtnModeSP){
+		if(isPressBtnBack || isPressBtnModeFW || isPressBtnModeSP || isPressBtnModeBob){
 			this.isPressBtnBack=false;
 			this.isPressBtnModeFW=false;
 			this.isPressBtnModeSP=false;
+			this.isPressBtnModeBob=false;
 			sbg.getState(0).init(gc,sbg);
 			sbg.enterState(0);
 		}
@@ -110,6 +118,16 @@ public class Parametre extends BasicGameState implements ComponentListener {
 				}
 			}
 			this.isPressBtnModeSP=true;
+		} else if(source == modeBob) {
+			if(!typeGame.equalsIgnoreCase("BS")) {
+				lignes = Arrays.asList("BS");
+				try {
+					Files.write(fichier, lignes, Charset.forName("UTF-8"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			this.isPressBtnModeBob = true;
 		}
 		
 	}

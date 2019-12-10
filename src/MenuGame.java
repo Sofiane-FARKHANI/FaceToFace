@@ -14,7 +14,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class MenuGame extends BasicGameState implements ComponentListener{
 
 	private MouseOverArea btnPlay, btnExit, btnParam;
-	private Image backgroundBtnPlay, backgroundBtnExit, backgroundBtnParam, farWestWallpaper, nomJeu, spaceWallpaper;
+	private Image backgroundBtnPlay, backgroundBtnExit, backgroundBtnParam, farWestWallpaper, nomJeu, spaceWallpaper, bobWallpaper;
 	private boolean isPressBtnParam, isPressBtnPlay, isPressBtnExit;
 	private int stateId=-1;
 	private String typeGame;
@@ -28,6 +28,7 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		bobWallpaper=new Image("res/bikini_bottom.png").getScaledCopy(800, 600);
 		farWestWallpaper=new Image("res/wild_west.png");
 		backgroundBtnPlay=new Image("res/btn1.png");
 		backgroundBtnExit=new Image("res/btn2.png");
@@ -53,8 +54,10 @@ public class MenuGame extends BasicGameState implements ComponentListener{
 		
 		if(typeGame.equalsIgnoreCase("FW"))
 			g.drawImage(farWestWallpaper,0,0);
-		else
+		else if(typeGame.equalsIgnoreCase("SP"))
 			g.drawImage(spaceWallpaper,0,0);
+		else
+			g.drawImage(bobWallpaper, 0, 0);
 		
 		btnPlay.render(gc, g);
 		btnParam.render(gc, g);

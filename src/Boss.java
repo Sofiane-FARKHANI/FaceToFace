@@ -17,8 +17,14 @@ public class Boss extends Ennemi {
 			int pos = (int)(Math.random()*dico.size());
 			this.mots.add(dico.get(pos));
 		}
-		//if(typeGame.equalsIgnoreCase("FW"))
+		
+		if(typeGame.equalsIgnoreCase("FW"))
 			this.img=new Image("res/boss.png");
+		else if(typeGame.equalsIgnoreCase("SP"))
+			this.img=new Image("res/boss_alien.png");
+		else
+			this.img=new Image("res/boss_bob.png");
+		
 		x = 600;
 		y = (int) (Math.random() * 100 + 400);
 		vx = 5;
@@ -36,7 +42,6 @@ public class Boss extends Ennemi {
 	public void update(int delta) {
 		if (x > 100)
 			x -= vx * ((float) delta / 1000);
-		
 	}
 	
 	public void supprMot() {
