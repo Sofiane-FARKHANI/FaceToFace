@@ -8,7 +8,6 @@ import org.newdawn.slick.SlickException;
 public class Boss extends Ennemi {
 	
 	private ArrayList<String> mots;
-	private Image img;
 	
 	public Boss(ArrayList<String> dico, String typeGame) throws SlickException {
 		int nbMotAlea = (int)(Math.random()*3)+1;

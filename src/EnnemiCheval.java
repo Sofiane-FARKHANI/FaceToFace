@@ -4,9 +4,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class EnnemiCheval extends Ennemi {
-
-	//https://dribbble.com/shots/5504359-Cute-cartoon-cowboy-on-his-horse
-	private Image img;	
 	
 	/**
 	 * Constructeur par defaut de la classe EnnemiCheval

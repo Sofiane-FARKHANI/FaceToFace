@@ -89,6 +89,7 @@ public class PartieDeJeu extends BasicGameState {
 								ennemis.remove(i);
 								player.setScore(player.getScore()+5);
 								saisiUser.setText("");
+								this.genererEnnemi(dico);
 							}
 							else {
 								((Boss) ennemis.get(i)).supprMot();
@@ -105,6 +106,7 @@ public class PartieDeJeu extends BasicGameState {
 							player.setScore(player.getScore() + 1);
 							saisiUser.setText("");
 							ennemis.remove(i);
+							this.genererEnnemi(dico);
 						}else {
 							for(int j=0; j<ennemis.size();j++) {
 								ennemis.get(j).setVx(ennemis.get(j).getVx()*1.25f);

@@ -1,4 +1,5 @@
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
 /**
  * Classe abstraite permettant de definir le comportement de base d un ennemi
@@ -9,6 +10,7 @@ public abstract class Ennemi {
 	
 	protected String lettres;
 	protected float x, y, vx; 
+	protected Image img;
 	
 	/**
 	 * Methode permettant de recuperer le mot d un ennemi

@@ -7,7 +7,7 @@ public class Joueur {
 
 	private boolean estVivant;
 	private int x, y, score;
-	private Image img, fondMsgMort;
+	private Image img; //fondMsgMort;
 
 	/**
 	 * Constructeur par defaut de la classe Joueur
@@ -27,7 +27,7 @@ public class Joueur {
 			this.img=new Image("res/bob.png");
 			this.y=400;
 		}
-		this.fondMsgMort=new Image("res/bulle.png");
+		//this.fondMsgMort=new Image("res/bulle.png");
 	}
 
 	/**
@@ -39,11 +39,11 @@ public class Joueur {
 		g.drawImage(img, x, y);
 		g.setColor(Color.white);
 		g.drawString("Scores : " + this.score, 700, 650);
-		if (!this.estVivant) {
+		/*if (!this.estVivant) {
 			g.drawImage(fondMsgMort, x+20, y-60);
 			g.setColor(Color.black);
 			g.drawString("AIE !", x+45, y-45);
-		}
+		}*/
 	}
 
 	/**

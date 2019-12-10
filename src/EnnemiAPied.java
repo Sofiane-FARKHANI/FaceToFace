@@ -5,7 +5,6 @@ import org.newdawn.slick.SlickException;
 
 public class EnnemiAPied extends Ennemi {
 
-	private Image img;
 	/**
 	 * Constructeur par defaut de la classe EnnemiAPied
 	 * 
