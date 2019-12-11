@@ -9,6 +9,12 @@ public class Boss extends Ennemi {
 	
 	private ArrayList<String> mots;
 	
+	/**
+	 * Constructeur permettant d'instancier un boss
+	 * @param dico : arraylist contenant tous le dictionnaire 
+	 * @param typeGame : type de jeu
+	 * @throws SlickException
+	 */
 	public Boss(ArrayList<String> dico, String typeGame) throws SlickException {
 		int nbMotAlea = (int)(Math.random()*3)+1;
 		this.mots = new ArrayList<String>();
@@ -29,6 +35,9 @@ public class Boss extends Ennemi {
 		vx = 5;
 	}
 	
+	/**
+	 * Méthode permettant d'afficher le boss et ces mots dans la fenetre
+	 */
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(img, x, y);
@@ -43,14 +52,26 @@ public class Boss extends Ennemi {
 			x -= vx * ((float) delta / 1000);
 	}
 	
+	/**
+	 * Supprime le mot qui afficher à l'écran de la liste
+	 */
 	public void supprMot() {
 		this.mots.remove(0);
 	}
 	
+	/**
+	 * Vérifie que le mot saisi est le mot affiché à l'écran
+	 * @param motSaisi : mot saisi par l'utilisateur
+	 * @return
+	 */
 	public boolean comparaisonMotAfficher(String motSaisi) {
 		return this.mots.get(0).hashCode() == motSaisi.hashCode();
 	}
 	
+	/**
+	 * Méthode permettant de savoir le nombre de mot restant avant que l'ennemi meurt
+	 * @return
+	 */
 	public int nbMotRestant() {
 		return this.mots.size();
 	}

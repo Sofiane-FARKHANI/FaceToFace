@@ -30,7 +30,7 @@ public class EnnemiCheval extends Ennemi {
 	 */
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.white);
+		g.setColor(Color.black);
 		g.drawString(lettres, x, y - 25);
 		//g.fillRect(x, y, 20, 20);
 		g.drawImage(this.img, x, y);

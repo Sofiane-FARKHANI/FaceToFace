@@ -16,7 +16,6 @@ public class Joueur {
 	public Joueur(String typeGame) throws SlickException {
 		this.estVivant = true;
 		this.x = 100;
-		
 		if(typeGame.equalsIgnoreCase("FW")) {
 			this.img = new Image("res/yakari.png").getScaledCopy(0.3f);
 			this.y = 500;
