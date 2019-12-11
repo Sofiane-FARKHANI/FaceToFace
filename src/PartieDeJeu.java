@@ -25,6 +25,8 @@ public class PartieDeJeu extends BasicGameState {
 	private Ennemi e;
 	private Joueur player;
 	private String typeGame;
+	
+	private boolean erreur, motSuppr;
 
 	private int nbEnnemiVague, stateId=-1;
 	
@@ -41,6 +43,8 @@ public class PartieDeJeu extends BasicGameState {
 		this.fic = new LireFichier("res/DicoSansAccent.txt");
 		this.infoJeu = new LireFichier("res/info.txt");
 		this.dico = new ArrayList<String>();
+		this.erreur=false;
+		this.motSuppr=false;
 		
 		// Capture d exception lors de la lecture du fichier txt
 		try {
@@ -90,15 +94,15 @@ public class PartieDeJeu extends BasicGameState {
 								player.setScore(player.getScore()+5);
 								saisiUser.setText("");
 								this.genererEnnemi(dico);
+								motSuppr=true;
 							}
 							else {
 								((Boss) ennemis.get(i)).supprMot();
 								saisiUser.setText("");
+								motSuppr=true;
 							}
 						} else {
-							for(int j=0; j<ennemis.size();j++) {
-								ennemis.get(j).setVx(ennemis.get(j).getVx()*1.25f);
-							}
+							erreur=true;
 						}
 							
 					} else {
@@ -107,14 +111,20 @@ public class PartieDeJeu extends BasicGameState {
 							saisiUser.setText("");
 							ennemis.remove(i);
 							this.genererEnnemi(dico);
+							motSuppr=true;
 						}else {
-							for(int j=0; j<ennemis.size();j++) {
-								ennemis.get(j).setVx(ennemis.get(j).getVx()*1.25f);
-							}
+							erreur=true;
 						}
 					}
 				}
 			}
+			if(erreur && !motSuppr) {
+				for(int j=0; j<ennemis.size();j++) {
+					ennemis.get(j).setVx(ennemis.get(j).getVx()*1.25f);
+				}
+				erreur=false;
+			}
+			motSuppr=false;
 		} else {
 			sbg.enterState(3);
 		}
